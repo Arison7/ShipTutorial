@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "watch": "tsc -w",
-    "test": "jest"
+    "test": "jest",
+    "compile": "tsc"
+
   },
   "keywords": [],
   "author": "",
