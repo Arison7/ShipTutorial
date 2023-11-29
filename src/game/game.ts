@@ -24,6 +24,28 @@ export class Game extends Entity {
 			// start update loop
 			this.Update()
 		})
+
+		this.DirtyDraw();
+	}
+
+	private DirtyDraw() : void{
+		// Create and attach Canvas to the DOM
+		const canvas = document.createElement('canvas');
+		canvas.setAttribute('width','500px');
+		canvas.setAttribute('heigh','500px');
+		document.body.appendChild(canvas);
+
+
+		// "!" here is to ignore the type check on the ctx element 
+		const ctx = canvas.getContext('2d')!;
+		ctx.beginPath()
+		ctx.fillStyle = "red";
+		ctx.rect(10,10,50,50);
+		ctx.fill()
+
+
+
+
 	}
 
 	public Update() : void {
