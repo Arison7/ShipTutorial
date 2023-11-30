@@ -1,12 +1,13 @@
 module.exports = {
 	testEnvironment: 'jsdom',
 	moduleNameMapper: {
-		'^@/(.*)$': '<rootDir>/src/$1'
+		'^(\\.\\.?\\/.+)\\.js$': '$1'
 	},
 	moduleFileExtensions: ['js', 'ts'],
 	transform: {
-		'^.+\\.ts$': 'ts-jest'
-	},
+        '\\.[jt]sx?$': 'ts-jest'
+    },
+    extensionsToTreatAsEsm: ['.ts'],
 	setupFiles: [],
 	transformIgnorePatterns: [
 		'/node_modules/'
@@ -14,6 +15,7 @@ module.exports = {
 	testPathIgnorePatterns: [
 		'__testUtils__'
 	],
+ 
 	clearMocks: true,
 	restoreMocks: true,
 	testMatch: [

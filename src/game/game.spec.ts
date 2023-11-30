@@ -1,6 +1,7 @@
 import { Game } from './game'
 import { Entity }  from '../utils/ecs/entity'
 import { IComponent } from '../utils/ecs/component'
+import { Grid } from '../grid/grid';
 
 class C1 implements IComponent {
 	public Entity: Game;
@@ -31,13 +32,10 @@ describe('>>> Game', () => {
 	const c2 = new C2();
 	const c3 = new C3();
 
-	const e1 = new E1();
-	const e2 = new E2();
-	const e3 = new E3();
-
+	
 	beforeEach(() =>{
 		game = new Game();
-		game.Entities.push(e1, e2, e3);
+
 
 		//yeah idk
 		window.requestAnimationFrame = jest.fn().mockImplementationOnce((cb) => cb())
@@ -95,35 +93,19 @@ describe('>>> Game', () => {
 		expect(spy3).toHaveBeenCalled()
 	});
 
-	it('should awake all children', () => {
-		const spy1 = jest.spyOn(e1, 'Awake')
-		const spy2 = jest.spyOn(e2, 'Awake')
-		const spy3 = jest.spyOn(e3, 'Awake')
+	it('Should update and awake all the children', () => {
+		const spyGridAwake = jest.spyOn(Grid.prototype, 'Awake')
+		const spyGridUpdate = jest.spyOn(Grid.prototype, 'Update')
 
-		expect(spy1).not.toHaveBeenCalled()
-		expect(spy2).not.toHaveBeenCalled()
-		expect(spy3).not.toHaveBeenCalled()
+		expect(spyGridAwake).not.toHaveBeenCalled()
+		expect(spyGridUpdate).not.toHaveBeenCalled()
 
 		game.Awake()
-
-		expect(spy1).toHaveBeenCalled()
-		expect(spy2).toHaveBeenCalled()
-		expect(spy3).toHaveBeenCalled()
-	});
-
-	it('should update all children', () => {
-		const spy1 = jest.spyOn(e1, 'Update')
-		const spy2 = jest.spyOn(e2, 'Update')
-		const spy3 = jest.spyOn(e3, 'Update')
-
-		expect(spy1).not.toHaveBeenCalled()
-		expect(spy2).not.toHaveBeenCalled()
-		expect(spy3).not.toHaveBeenCalled()
+		expect(spyGridAwake).toHaveBeenCalled()
 
 		game.Update()
+		expect(spyGridUpdate).toHaveBeenCalled()	
 
-		expect(spy1).toHaveBeenCalled()
-		expect(spy2).toHaveBeenCalled()
-		expect(spy3).toHaveBeenCalled()
-	});
+		})
+	
 });

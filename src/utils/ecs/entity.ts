@@ -1,5 +1,5 @@
-import { IComponent } from "./component";
-import { IUpdate , IAwake } from "../lifecycle/lifecycle";
+import { IComponent } from "./component.js";
+import { IUpdate , IAwake } from "../lifecycle/lifecycle.js";
 
 type constr<T> = {new (...args: any[]) : T};
 
