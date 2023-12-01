@@ -1,5 +1,6 @@
 import { Canvas } from './canvas.js'
 import { Vector2D } from '../vector2D/vector2D.js'
+import { Color } from '../color/color.js'
 
 describe('>>> Canvas', () => {
 	let canvas: Canvas
@@ -39,7 +40,7 @@ describe('>>> Canvas', () => {
 			// --- ADD --- //
 			const start = new Vector2D(0, 0)
 			const size = new Vector2D(10, 10)
-			const color = '#ffff00'
+			const color = new Color(0, 0, 0, 1)
 
 			const beginPathSpy = jest.spyOn(canvas.Context, 'beginPath')
 			const rectSpy = jest.spyOn(canvas.Context, 'rect')
@@ -50,10 +51,33 @@ describe('>>> Canvas', () => {
 			expect(beginPathSpy).toHaveBeenCalled()
 			expect(rectSpy).toHaveBeenCalledWith(start.x, start.y, size.x, size.y)
 			expect(fillSpy).toHaveBeenCalled()
-			expect(canvas.Context.fillStyle).toBe(color)
+			expect(canvas.Context.fillStyle).toBe<string>('#000000');
 			// --- ADD --- //
 			})
+			it('should draw and fill the circle', () => {
+				const center = new Vector2D(0, 0)
+				const radius = 1
 
-	})
+				const beginPathSpy = jest.spyOn(canvas.Context, 'beginPath')
+				const arcSpy = jest.spyOn(canvas.Context, 'arc')
+				const fillSpy = jest.spyOn(canvas.Context, 'fill')
+
+				canvas.FillCircle(center, radius, new Color(255, 255, 255, 1))
+
+				expect(beginPathSpy).toHaveBeenCalled()
+				expect(arcSpy).toHaveBeenCalledWith(center.x, center.y, radius, 0, Math.PI * 2)
+				expect(fillSpy).toHaveBeenCalled()
+				expect(canvas.Context.fillStyle).toBe('#ffffff')
+			}) 
+			it('should set css style', () => {
+				const zIndex = '1'
+				expect(canvas.Element.style.zIndex).not.toBe<string>(zIndex)
+
+				canvas.SetStyle({ "zIndex" :  zIndex })
+
+				expect(canvas.Element.style.zIndex).toBe<string>(zIndex)
+				})
+
+			})
 
 })

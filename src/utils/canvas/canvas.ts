@@ -1,5 +1,6 @@
 import { Vector2D } from "../vector2D/vector2D.js";
 import { IAwake } from "../lifecycle/lifecycle.js";
+import { Color } from "../color/color.js";
 
 
 export class Canvas implements IAwake {
@@ -28,9 +29,9 @@ export class Canvas implements IAwake {
 
 	}
 
-	public FillRect(start: Vector2D, size: Vector2D, color: string ) : void {
+	public FillRect(start: Vector2D, size: Vector2D, color: Color) : void {
 		this._ctx.beginPath();
-		this._ctx.fillStyle = color;
+		this._ctx.fillStyle = color.AsString();
 		this._ctx.rect(start.x, start.y, size.x, size.y);
 		this._ctx.fill();
 	}
@@ -40,13 +41,32 @@ export class Canvas implements IAwake {
 
 	}
 
-	public get Elmement(): HTMLCanvasElement {
+	public FillCircle(center : Vector2D, radius : number , color : Color) : void {
+		this._ctx.beginPath();
+		this._ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI);
+		this._ctx.fillStyle = color.AsString();
+		this._ctx.fill();
+	}
+
+	public get Element(): HTMLCanvasElement {
 		return this._elm;
 	}
 
 	public get Context(): CanvasRenderingContext2D {
 		return this._ctx;
 	}
+	public SetStyle(style: Partial<CSSStyleDeclaration>): void { 
+		for (const key in style) {
+			if (!Object.hasOwnProperty.call(style, key)) {
+				continue
+			}
 
+			if (!style[key]) {
+				continue
+			}
+
+			this._elm.style[key] = style[key] as string
+		}
+	} 
 
 }
