@@ -2,6 +2,7 @@ import { Game } from './game'
 import { Entity }  from '../utils/ecs/entity'
 import { IComponent } from '../utils/ecs/component'
 import { Grid } from '../grid/grid';
+import { Fleet } from '../fleet/fleet';
 
 class C1 implements IComponent {
 	public Entity: Game;
@@ -93,19 +94,25 @@ describe('>>> Game', () => {
 		expect(spy3).toHaveBeenCalled()
 	});
 
-	it('Should update and awake all the children', () => {
+	it('should awake and update all children', () => {
 		const spyGridAwake = jest.spyOn(Grid.prototype, 'Awake')
 		const spyGridUpdate = jest.spyOn(Grid.prototype, 'Update')
+
+		const spyFleetAwake = jest.spyOn(Fleet.prototype, 'Awake')
+		const spyFleetUpdate = jest.spyOn(Fleet.prototype, 'Update')
 
 		expect(spyGridAwake).not.toHaveBeenCalled()
 		expect(spyGridUpdate).not.toHaveBeenCalled()
 
+		expect(spyFleetAwake).not.toHaveBeenCalled()
+		expect(spyFleetUpdate).not.toHaveBeenCalled()
+
 		game.Awake()
 		expect(spyGridAwake).toHaveBeenCalled()
+		expect(spyFleetAwake).toHaveBeenCalled() 
 
 		game.Update()
-		expect(spyGridUpdate).toHaveBeenCalled()	
-
-		})
-	
+		expect(spyGridUpdate).toHaveBeenCalled()
+		expect(spyFleetUpdate).toHaveBeenCalled() // <--- ADD
+	})
 });

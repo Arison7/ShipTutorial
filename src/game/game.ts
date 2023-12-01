@@ -1,6 +1,8 @@
 import { Entity } from "../utils/ecs/entity.js";
 import { Settings } from "../settings/settings.js";
 import { Grid } from '../grid/grid.js';
+import { Fleet } from "../fleet/fleet.js";
+import { Team } from "../team/team.js";
 
 export class Game extends Entity {
 	private _lastTimestamp : number = 0;
@@ -22,7 +24,11 @@ export class Game extends Entity {
 	public Awake() : void {
 		super.Awake()
 
-		this._entities.push(new Grid());
+		this._entities.push(
+			new Grid(),
+			new Fleet(Team.A),
+			new Fleet(Team.B)
+		);
 		// awake all the children
 		for (const entity of this._entities){
 			entity.Awake();
