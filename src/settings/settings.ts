@@ -1,4 +1,4 @@
-import { Color } from "../utils/color/color";
+import { Color } from "../utils/color/color.js";
 
 export const Settings = Object.freeze({
 	grid: {
@@ -8,6 +8,10 @@ export const Settings = Object.freeze({
 		color : new Color(245, 245, 245,1) 
 	},
 	ships: {
-		fleetSize : 3
+		fleetSize : 3,
+		colors : {
+			a : new Color(105, 20, 30, 1),
+			b : new Color(205, 10, 60, 1),
+		}
 	}
 });
