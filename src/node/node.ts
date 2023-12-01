@@ -1,5 +1,5 @@
 import { Entity } from "../utils/ecs/entity.js";
-import { NodeDrawComponent } from "./components/draw.js";
+import { NodeDrawComponent } from "./components/draw/draw.js";
 import { Vector2D } from "../utils/vector2D/vector2D.js";
 
 export class Node extends Entity{

@@ -1,4 +1,4 @@
-import { NodeDrawComponent } from "./components/draw"
+import { NodeDrawComponent } from "./components/draw/draw"
 import { Node } from "./node";
 import { Vector2D } from "../utils/vector2D/vector2D";
 
