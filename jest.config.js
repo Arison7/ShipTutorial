@@ -10,12 +10,13 @@ module.exports = {
     extensionsToTreatAsEsm: ['.ts'],
 	setupFiles: [],
 	transformIgnorePatterns: [
-		'/node_modules/'
+		'/node_modules/',
+		'/public/'
 	],
 	testPathIgnorePatterns: [
 		'__testUtils__'
 	],
- 
+	maxWorkers: 1,
 	clearMocks: true,
 	restoreMocks: true,
 	testMatch: [

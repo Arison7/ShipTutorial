@@ -4,8 +4,7 @@ import { mockFleetFactory } from "./fleet.mock";
 import { Ship } from "../ship/ship";
 import { Settings } from "../settings/settings";
 
-
-
+jest.mock('../ship/ship.ts');
 class C1 implements IComponent {
   public Entity: Fleet
   public Awake(): void { /*...*/ }
