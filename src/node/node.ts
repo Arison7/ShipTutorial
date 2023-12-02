@@ -1,8 +1,11 @@
 import { Entity } from "../utils/ecs/entity.js";
 import { NodeDrawComponent } from "./components/draw/draw.js";
 import { Vector2D } from "../utils/vector2D/vector2D.js";
+import { CanvasLayer } from "../canvas-layer/canvas-layer.js";
 
 export class Node extends Entity{
+
+	public IsActive: boolean = false;
 
 	constructor (
 		public readonly Start: Vector2D,
@@ -14,8 +17,15 @@ export class Node extends Entity{
 
 	public Awake() : void {
 		this.AddComponent(new NodeDrawComponent())
-
 		super.Awake();
+		document.body.addEventListener('click', (e: MouseEvent) => {
+			const point = CanvasLayer.Background.CalcLocalPointFrom(new Vector2D(e.clientX, e.clientY))
+			if (point && this.Occupies(point)) {
+				this.IsActive = true;
+			}
+		})
+
+
 	}
 
 	public get Size(): Vector2D {
@@ -31,5 +41,23 @@ export class Node extends Entity{
 			this.Start.y + this.Size.y / 2
 		);
 	}
+	public Occupies(point: Vector2D): boolean {
+		if (point.x < this.Start.x) {
+			return false
+		}
 
+		if (point.x > this.End.x) {
+			return false
+		}
+
+		if (point.y < this.Start.y) {
+			return false
+		}
+
+		if (point.y > this.End.y) {
+			return false
+		}
+
+		return true
+   }
 }
