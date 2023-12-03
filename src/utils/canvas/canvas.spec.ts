@@ -6,7 +6,7 @@ describe('>>> Canvas', () => {
 	let canvas: Canvas
 
 	beforeEach(() => {
-		canvas = new Canvas({ x: 100, y: 100 })
+		canvas = new Canvas(new Vector2D(100,  100 ))
 		canvas.Awake()
 	})
 	it('should create and attach canvas to the DOM when awakens', () => {
@@ -77,6 +77,22 @@ describe('>>> Canvas', () => {
 
 			expect(canvas.Element.style.zIndex).toBe<string>(zIndex)
 			})
+
+		})
+		it('Should draw the text', () => {
+			const text = 'test';
+			const position = new Vector2D(0, 0);
+			const color = new Color(240, 10, 20, 1);
+
+
+			const spy = jest.spyOn(canvas.Context, 'fillText');
+
+			expect(spy).not.toHaveBeenCalled();
+
+			canvas.DrawText(text, position, color);
+
+			expect(spy).toHaveBeenCalledWith(text, position.x, position.y);
+
 
 		})
 		describe('>>> calculate local point by global', () => {

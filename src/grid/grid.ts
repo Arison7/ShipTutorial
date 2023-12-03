@@ -2,6 +2,7 @@ import { Entity } from "../utils/ecs/entity.js";
 import { Settings } from "../settings/settings.js";
 import { Node } from '../node/node.js';
 import { Vector2D } from "../utils/vector2D/vector2D.js";
+import { GridOnClickComponent } from "./components/onclick/onclick.js";
 
 export class Grid extends Entity {
 
@@ -12,6 +13,8 @@ export class Grid extends Entity {
 	}
 
 	public Awake(): void {
+		this.AddComponent(new GridOnClickComponent());
+
 		super.Awake();
 
 		this.InitNodes();

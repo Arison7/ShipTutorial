@@ -10,6 +10,14 @@ export class Game extends Entity {
 	private _entities : Entity[] = [];
 
 
+	constructor(grid : Grid,fleetA : Fleet,fleetB : Fleet){
+		super();
+		this._entities.push(
+			grid,
+			fleetA,
+			fleetB
+		);
+	}
 
 	/**
 	 * get Entities
@@ -26,12 +34,6 @@ export class Game extends Entity {
 		this.AddComponent(new GameInputComponent());
 		super.Awake()
 		
-		const grid = new Grid();
-		this._entities.push(
-			grid,
-			new Fleet(Team.A, grid),
-			new Fleet(Team.B, grid)
-		);
 		// awake all the children
 		for (const entity of this._entities){
 			entity.Awake();

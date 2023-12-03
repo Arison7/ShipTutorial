@@ -1,6 +1,7 @@
 import { Color } from "../utils/color/color.js";
 
 export const Settings = Object.freeze({
+	debugMode: true,
 	grid: {
 		dimensions: 6,
 		nodeSize: 100,
@@ -11,7 +12,7 @@ export const Settings = Object.freeze({
 		} 
 	},
 	ships: {
-		fleetSize : 3,
+		fleetSize : 1,
 		colors : {
 			a : new Color(105, 20, 30, 1),
 			b : new Color(205, 10, 60, 1),
