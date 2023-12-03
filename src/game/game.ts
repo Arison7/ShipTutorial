@@ -3,6 +3,7 @@ import { Settings } from "../settings/settings.js";
 import { Grid } from '../grid/grid.js';
 import { Fleet } from "../fleet/fleet.js";
 import { Team } from "../team/team.js";
+import { GameInputComponent } from "./componentes/input/input.js";
 
 export class Game extends Entity {
 	private _lastTimestamp : number = 0;
@@ -22,6 +23,7 @@ export class Game extends Entity {
 	 * @returns void
 	 */
 	public Awake() : void {
+		this.AddComponent(new GameInputComponent());
 		super.Awake()
 		
 		const grid = new Grid();

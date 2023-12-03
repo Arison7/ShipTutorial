@@ -1,8 +1,10 @@
 import { IComponent } from "./component.js";
 import { IUpdate , IAwake } from "../lifecycle/lifecycle.js";
 
-type constr<T> = {new (...args: any[]) : T};
+type AbstractComponent<T> = Function & { prototype: T }
 
+
+type constr<T> =  AbstractComponent<T> | {new (...args: any[]) : T};
 
 export abstract class Entity implements IUpdate, IAwake {
 	protected _components: IComponent[] = [];

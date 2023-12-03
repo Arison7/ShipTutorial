@@ -18,12 +18,6 @@ export class Node extends Entity{
 	public Awake() : void {
 		this.AddComponent(new NodeDrawComponent())
 		super.Awake();
-		document.body.addEventListener('click', (e: MouseEvent) => {
-			const point = CanvasLayer.Background.CalcLocalPointFrom(new Vector2D(e.clientX, e.clientY))
-			if (point && this.Occupies(point)) {
-				this.IsActive = true;
-			}
-		})
 
 
 	}
