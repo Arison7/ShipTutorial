@@ -27,7 +27,7 @@ export class NodeDrawComponent implements IComponent {
 		CanvasLayer.Background.FillRect(
 			this.Entity.Start,
 			this.Entity.Size,
-			this.Entity.IsActive ? Settings.grid.color.active : Settings.grid.color.regular
+			this.Entity.IsInLocomotionRange ? Settings.grid.color.inLocomotionRange: Settings.grid.color.regular
 		)
 	}
 	private DrawDebugInfo() : void {

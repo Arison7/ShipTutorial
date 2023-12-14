@@ -33,13 +33,16 @@ export class Fleet extends Entity{
 		const dimension = Settings.grid.dimensions;
 		const nodes = this._grid.Nodes;
 
-
-
 		for (let i = 0; i < Settings.ships.fleetSize; i++) {
 			const node = this.Team === Team.A ? nodes[i * dimension] : nodes[nodes.length - 1 - i * dimension];
 			const ship = new Ship(this, node);
 			this._ships.push(ship);
 			ship.Awake();
+
+		}
+
+		if(this.Team === Team.A){
+			this._ships[0].IsActive = true;
 
 		}
 

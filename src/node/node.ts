@@ -6,11 +6,14 @@ import { CanvasLayer } from "../canvas-layer/canvas-layer.js";
 export class Node extends Entity{
 
 	public IsActive: boolean = false;
+	public Ship: Entity | null = null;
+	public IsInLocomotionRange: boolean = false;
 
 	constructor (
 		public readonly Start: Vector2D,
 		public readonly End: Vector2D,
 		public readonly Index: Vector2D,
+		public readonly Neighbors: Node[]
 	) {
 		super();
 	}
@@ -53,5 +56,17 @@ export class Node extends Entity{
 		}
 
 		return true
+	}
+	public FindAndSetInLocomotionRange(range : number) : void{
+		if(!this.Ship){
+			this.IsInLocomotionRange = true;
+		}
+		if(--range <= 0){
+			return;
+		}
+		for (const neighbor of this.Neighbors) {
+			if(!neighbor.IsInLocomotionRange && !neighbor.Ship)
+				neighbor.FindAndSetInLocomotionRange(range);
+		}
    }
 }
